@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.google-signin-btn {
+  margin-top: 10px;
+  background-color: #4285F4;
+  color: white;
+}
+
+.google-signin-btn:hover {
+  background-color: #357ae8;
+}

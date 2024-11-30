@@ -1,15 +1,28 @@
 {
-  "name": "budget-app",
+  "name": "$VISTA",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@firebase/auth": "^1.8.1",
+    "@firebase/storage": "^0.13.4",
+    "@mui/icons-material": "^6.1.9",
+    "@mui/material": "^6.1.9",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "firebase": "^11.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-firebase-hooks": "^5.1.1",
+    "react-router-dom": "^7.0.1",
     "react-scripts": "5.0.1",
+    "recharts": "^2.13.3",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.14.5"
   },
   "scripts": {
     "start": "react-scripts start",
