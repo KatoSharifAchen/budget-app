@@ -18,6 +18,8 @@ const SignUp = () => {
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 setError('This email address is already in use.');
+            } else if (error.code === 'auth/network-request-failed') {
+                setError('Network error. Please check your internet connection and try again.');
             } else {
                 setError(error.message);
             }
@@ -29,7 +31,13 @@ const SignUp = () => {
             await signInWithPopup(auth, googleProvider);
             navigate('/dashboard'); // Automatically log in the user and redirect to the dashboard
         } catch (error) {
-            setError(error.message);
+            if (error.code === 'auth/account-exists-with-different-credential') {
+                setError('An account already exists with the same email address but different sign-in credentials.');
+            } else if (error.code === 'auth/network-request-failed') {
+                setError('Network error. Please check your internet connection and try again.');
+            } else {
+                setError(error.message);
+            }
         }
     };
 

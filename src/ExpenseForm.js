@@ -2,24 +2,28 @@ import React, { useState } from 'react';
 import { TextField, Button, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import { db } from './firebase';
 import { collection, addDoc } from "firebase/firestore";
+import { useAuth } from './AuthContext';
 
 const ExpenseForm = () => {
     const [amount, setAmount] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
+    const { currentUser } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await addDoc(collection(db, "expenses"), {
-                amount,
-                description,
-                category,
-                date: new Date()
-            });
-            setAmount('');
-            setDescription('');
-            setCategory('');
+            if (currentUser) {
+                await addDoc(collection(db, `users/${currentUser.uid}/expenses`), {
+                    amount: parseFloat(amount),
+                    description,
+                    category,
+                    date: new Date()
+                });
+                setAmount('');
+                setDescription('');
+                setCategory('');
+            }
         } catch (err) {
             console.error("Error adding document: ", err);
         }
@@ -50,6 +54,8 @@ const ExpenseForm = () => {
                     <MenuItem value="Transport">Transport</MenuItem>
                     <MenuItem value="Entertainment">Entertainment</MenuItem>
                     <MenuItem value="Utilities">Utilities</MenuItem>
+                    <MenuItem value="Food">Others</MenuItem>
+
                 </Select>
             </FormControl>
             <Button type="submit" variant="contained" color="primary">Add Expense</Button>

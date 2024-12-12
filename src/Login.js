@@ -20,6 +20,8 @@ const Login = () => {
         } catch (error) {
             if (error.code === 'auth/invalid-credential') {
                 setError('Invalid email or password. Please try again.');
+            } else if (error.code === 'auth/network-request-failed') {
+                setError('Network error. Please check your internet connection and try again.');
             } else {
                 setError(error.message);
             }
@@ -33,6 +35,8 @@ const Login = () => {
         } catch (error) {
             if (error.code === 'auth/account-exists-with-different-credential') {
                 setError('An account already exists with the same email address but different sign-in credentials.');
+            } else if (error.code === 'auth/network-request-failed') {
+                setError('Network error. Please check your internet connection and try again.');
             } else {
                 setError(error.message);
             }
